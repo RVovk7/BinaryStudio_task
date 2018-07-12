@@ -1,0 +1,13 @@
+{
+	"presets": [
+        "@babel/preset-env",
+        "@babel/react"
+	],
+	"plugins": [
+		"transform-decorators-legacy",
+		"syntax-dynamic-import",
+		"react-hot-loader/babel",
+		"react-html-attrs",
+		"@babel/plugin-proposal-class-properties"
+	]
+}

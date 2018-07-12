@@ -1,0 +1,69 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+$screen-sm-min: 600px;
+$screen-norm-min: 900px;
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+@mixin norm {
+  @media only screen and (min-width: #{$screen-norm-min}) {
+    @content;
+  }
+}
+
+body {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  background: url(http://russenergo.ru/wp-content/uploads/2015/07/background-site1.jpg) no-repeat center center fixed;
+  padding: 0;
+  margin: 0;
+  color: white;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+}
+
+.main_container {
+  display: flex;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000000;
+  margin-top: 50px;
+  @include sm {
+    width: 900px;
+  }
+  @include norm {
+    width: 900px;
+  }
+}
+
+.recipeList {
+  display: flex;
+  @include sm {
+    width: 900px;
+    min-height: 1300px;
+  }
+  @include norm {
+    min-height: 750px;
+    width: 1000px;
+  }
+}
+
+.addButton {
+  display: flex;
+  margin: 50px;
+  align-self: flex-end;
+}
+.addForm{
+  margin-top: 50px;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "chatv2",
+  "version": "1.0.0",
+  "description": "chat with using react_redux_webSocket_nodeJS",
+  "main": "index.js",
+  "author": "wolf",
+  "license": "MIT",
+  "scripts": {
+    "start:client": "cd client && yarn run start",
+    "start:server": "cd server && nodemon app.js",
+    "start:db": "cd server && mongod --dbpath data/db --port 3001",
+    "s": "concurrently  \" yarn run start:db  \"  \" yarn run start:server  \" \" yarn run start:client \""
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1"
+  }
+}

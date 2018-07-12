@@ -1,0 +1,54 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js s
+
+PATH: 
+  /Users/romanvovk/.rvm/gems/ruby-2.3.0/bin:/Users/romanvovk/.rvm/gems/ruby-2.3.0@global/bin:/Users/romanvovk/.rvm/rubies/ruby-2.3.0/bin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/romanvovk/.rvm/gems/ruby-2.3.0/bin:/Users/romanvovk/.rvm/gems/ruby-2.3.0@global/bin:/Users/romanvovk/.rvm/rubies/ruby-2.3.0/bin:/usr/local/sbin:/Users/romanvovk/.rvm/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  10.6.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "chatv2",
+    "version": "1.0.0",
+    "description": "chat with using react_redux_webSocket_nodeJS",
+    "main": "index.js",
+    "author": "wolf",
+    "license": "MIT",
+    "scripts": {
+      "start:client": "cd client && yarn run start",
+      "start:server": "cd server && nodemon app.js",
+      "start:db": "cd server && mongod --dbpath data/db --port 3001",
+      "s": "concurrently  \" yarn run start:db  \"  \" yarn run start:server  \" \" yarn run start:client \""
+    },
+    "dependencies": {
+      "concurrently": "^3.5.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 127
+  Command: sh
+  Arguments: -c concurrently  " yarn run start:db  "  " yarn run start:server  " " yarn run start:client "
+  Directory: /Users/romanvovk/Sites/BinaryStudio_task
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:182:13)
+      at maybeClose (internal/child_process.js:961:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:248:5)
