@@ -17,13 +17,13 @@ import Slide from '@material-ui/core/Slide';
 import SaveIcon from '@material-ui/icons/Save';
 // --------------material import----------------
 function Transition(props) {
-    return <Slide direction="down" {...props} />;
+    return <Slide direction="left" {...props} />;
 }
 class AddModal extends Component {
     static propTypes = {
         isOpen: PropTypes.bool.isRequired,
         closeModal: PropTypes.func.isRequired,
-        dispatch: PropTypes.func.isRequired,
+        postRecipe: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -42,17 +42,17 @@ class AddModal extends Component {
     }
 
     addRecipe = () => {
-        const { state: { recipeName, recipeDetail }, props: { dispatch } } = this;
-         const data = {
+        const { state: { recipeName, recipeDetail }, props: { postRecipe } } = this;
+        const data = {
             time: Date.now(),
             recipeName,
             recipeDetail,
         };
-       dispatch(actions.addRecipe(data));
+        postRecipe(data);
     }
 
     render() {
-        const { props: { closeModal }, state: { opened, recipeName, recipeDetail } } = this;
+        const { addRecipe, props: { closeModal }, state: { recipeName, recipeDetail, opened } } = this;
         return (
             <div>
                 <Dialog
@@ -73,7 +73,7 @@ class AddModal extends Component {
                     </AppBar>
                     <form onSubmit={e => e.preventDefault()} className="addForm">
                         <DialogContent>
-                           {/*  <DialogContentText>
+                            {/*  <DialogContentText>
                                 Enter
                             </DialogContentText> */}
                             <TextField
@@ -102,7 +102,7 @@ class AddModal extends Component {
                             aria-label="add"
                             onClick={() => {
                                 closeModal();
-                                this.addRecipe();
+                                addRecipe();
                       }}>
                             <SaveIcon />
                         </Button>
@@ -114,13 +114,8 @@ class AddModal extends Component {
     }
 }
 
-const mapStateToProps = (state = []) => {
-    return {
-        state,
-    };
-};
-const mapDispatchToProps = dispatch => {
-    return { dispatch };
-};
+const mapDispatchToProps = dispatch => ({
+    postRecipe: data => dispatch(actions.postRecipe(data)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddModal);
+export default connect(null, mapDispatchToProps)(AddModal);

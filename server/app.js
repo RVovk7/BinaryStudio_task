@@ -9,24 +9,30 @@ mongoose.connect('mongodb://localhost:3001/recipeDB')
   });
 const app = express(),
   server = http.createServer(app);
-  /////mongoose schema
-const regSchema = new mongoose.Schema({
-  time: {
-    type: Number,
-    required: true,
-  },
-  recipeName: {
-    type: String,
-    required: true,
-  },
-  recipeDetail:{
-    type: String,
-    reqired: true,
-  }
+/////mongoose schema
+const recipeSchema = new mongoose.Schema({
+  time: Number,
+  timeModify: Number,
+  recipeName: String,
+  recipeDetail: String
+
 });
+let dataToClient = [];
+const DB = mongoose.model('recipeDB', recipeSchema);
+const recipeDB = DB.aggregate([{
+  $group: {
+    _id: '$time',
+    data: {
+      $push: {
+        time: '$time',
+        dateModify: '$dateModify',
+        recipeName: '$recipeName',
+        recipeDetail: '$recipeDetail',
+      },
+    },
+  },
 
-const DB = mongoose.model('userDB', regSchema);
-
+}]);
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -36,12 +42,26 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.post('/api/addRecipe', (req, res) => {
-   console.log(req.body)
-  //DB.create(req.body);
+  DB.create(req.body);
   res.send(JSON.stringify({
-    data : req.body
+    data: req.body
   }))
-  
+});
+app.get('/api/getRecipe', (req, res) => {
+  /*   res.send(JSON.stringify({
+      data,
+    })) */
+  recipeDB
+    .then(data =>
+      data.map(e=> e.data[e.data.length-1])
+    )
+    .then(data => res.send(JSON.stringify({
+      data,
+    })))
+    .catch(er => console.error(er))
+
+
+
 });
 
 

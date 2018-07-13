@@ -1,4 +1,6 @@
-import { combineReducers } from 'redux';
+import {
+  combineReducers,
+} from 'redux';
 import types from './types';
 
 const initialState = {
@@ -6,38 +8,69 @@ const initialState = {
   loading: false,
   error: null,
 };
-const addRecipe = (state = initialState, action) => {
-  console.log(action);
+const getRecipe = (state = initialState, action) => {
+  const {
+    data,
+  } = action;
   switch (action.type) {
     case types.FETCH_BEGIN:
-    return {
-      ...state,
-      loading: true,
-      error: null,
-      data: [],
-    };
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        data: [],
+      };
 
-  case types.FETCH_SUCCESS:
-    return {
-      ...state,
-      loading: false,
-      data: action,
-    };
+    case types.FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data,
+      };
 
-  case types.FETCH_ERROR:
-    return {
-      ...state,
-      loading: false,
-      error: action.payload.error,
-      data: [],
-    };
+    case types.FETCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+        data: [],
+      };
 
-  default:
-    return state;
+    default:
+      return state;
+  }
+};
+const postRecipe = (state = initialState, action) => {
+  switch (action.type) {
+    case types.FETCH_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        data: [],
+      };
+
+    case types.FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case types.FETCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+        data: [],
+      };
+
+    default:
+      return state;
   }
 };
 export const rootReducer = combineReducers({
-  addRecipe,
+  getRecipe,
+  postRecipe,
 });
 
 export default rootReducer;
