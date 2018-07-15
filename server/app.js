@@ -17,7 +17,6 @@ const recipeSchema = new mongoose.Schema({
   recipeDetail: String
 
 });
-let dataToClient = [];
 const DB = mongoose.model('recipeDB', recipeSchema);
 const recipeDB = DB.aggregate([{
   $group: {
@@ -42,22 +41,26 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.post('/api/addRecipe', (req, res) => {
-  DB.create(req.body);
-  res.send(JSON.stringify({
-    data: req.body
-  }))
+  DB.create(req.body).then(()=>
+    recipeDB
+    .then(data =>
+      data.map(e=> e.data[e.data.length-1])
+    )
+    .then(data => res.send(JSON.stringify(
+      data,
+    )))
+    .catch(er => console.error(er))
+  )
+ 
 });
 app.get('/api/getRecipe', (req, res) => {
-  /*   res.send(JSON.stringify({
-      data,
-    })) */
   recipeDB
     .then(data =>
       data.map(e=> e.data[e.data.length-1])
     )
-    .then(data => res.send(JSON.stringify({
+    .then(data => res.send(JSON.stringify(
       data,
-    })))
+    )))
     .catch(er => console.error(er))
 
 

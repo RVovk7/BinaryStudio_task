@@ -10,7 +10,7 @@ export const fetchSuccess = data => ({
 });
 
 export const fetchError = error => ({
-  type: types.FETCH_FAILURE,
+  type: types.FETCH_ERROR,
   payload: {
     error,
   },
@@ -37,7 +37,6 @@ export function postRecipe(recipeData) {
       .then(res => res.json())
       .then(json => {
         dispatch(fetchSuccess(json));
-        return json;
       })
       .catch(error => dispatch(fetchFailure(error)));
   };

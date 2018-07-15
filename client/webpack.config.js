@@ -40,7 +40,7 @@ const webpackConfig = {
 			{
 				test: /\.(gif|png|jpg|jpeg|svg)$/,
 				exclude: /node_modules/,
-				include: path.resolve(__dirname, './src/styles/media/'),
+				include: path.resolve(__dirname, './src/assets/media/'),
 				use: 'url-loader?limit=10000&name=assets/[name]-[hash].[ext]',
 			},
 		],
@@ -53,6 +53,7 @@ const webpackConfig = {
 			'modules': path.resolve(__dirname, './src/modules'),
 			'style': path.resolve(__dirname, './src/view/style'),
 			'add': path.resolve(__dirname, './src/view/modules/add'),
+			'svg': path.resolve(__dirname, './src/assets/media/svg'),
 		},
 	},
 	plugins: [

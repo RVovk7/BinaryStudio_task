@@ -7,7 +7,8 @@ import Recipe from 'components/Recipe';
 class RecipeList extends Component {
     static propTypes = {
         getRecipe: PropTypes.func.isRequired,
-        RecipeList: PropTypes.instanceOf(Array).isRequired,
+        openModal: PropTypes.func.isRequired,
+        Recipes: PropTypes.instanceOf(Object).isRequired,
     }
 
     componentDidMount() {
@@ -15,21 +16,30 @@ class RecipeList extends Component {
         getRecipe();
     }
 
+    componentWillReceiveProps() {
+        console.log('i recive props');
+    }
+
     render() {
-        // eslint-disable-next-line
-        const { RecipeList } = this.props;
-        console.log(RecipeList);
-     // RecipeList.loading ?
+        const { Recipes, openModal } = this.props;
+        if (!Recipes.loading) {
+            console.log('Recipes.data', Recipes.data);
+            return (
+                <div className="recipeList">
+                    {Recipes.data.map(e => <Recipe key={e.time} rList={e} openModal={openModal} />)}
+                </div>
+            );
+        }
         return (
             <div className="recipeList">
-                {RecipeList.map(e => <Recipe RecipeList={e} />)}
+                Loading...
             </div>
         );
     }
 }
 const mapStateToProps = (state = []) => {
     return {
-        RecipeList: state.getRecipe,
+        Recipes: state.getRecipe,
     };
 };
 const mapDispatchToProps = dispatch => ({

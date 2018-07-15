@@ -22,6 +22,7 @@ function Transition(props) {
 class AddModal extends Component {
     static propTypes = {
         isOpen: PropTypes.bool.isRequired,
+        isEdit: PropTypes.bool.isRequired,
         closeModal: PropTypes.func.isRequired,
         postRecipe: PropTypes.func.isRequired,
     };
@@ -29,7 +30,8 @@ class AddModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            opened: false,
+            isOpen: false,
+            isEdit: false,
             recipeName: '',
             recipeDetail: '',
         };
@@ -37,27 +39,42 @@ class AddModal extends Component {
 
     static getDerivedStateFromProps(nextProps) {
         return {
-            opened: nextProps.isOpen,
+            isOpen: nextProps.isOpen,
+            isEdit: nextProps.isEdit,
         };
     }
 
     addRecipe = () => {
         const { state: { recipeName, recipeDetail }, props: { postRecipe } } = this;
-        const data = {
-            time: Date.now(),
-            recipeName,
-            recipeDetail,
-        };
-        postRecipe(data);
+        if (!isEdit) {
+            const data = {
+                time: Date.now(),
+                recipeName,
+                recipeDetail,
+            };
+            postRecipe(data);
+            this.setState({
+                recipeName: '',
+                recipeDetail: '',
+            });
+        }
+        if (isEdit) {
+            const data = {
+                time: Date.now(),
+                recipeName,
+                recipeDetail,
+            };
+            //  must recive 'time' from component Recipe and send to server
+        }
     }
 
     render() {
-        const { addRecipe, props: { closeModal }, state: { recipeName, recipeDetail, opened } } = this;
+        const { addRecipe, props: { closeModal }, state: { recipeName, recipeDetail, isOpen } } = this;
         return (
             <div>
                 <Dialog
                     fullScreen
-                    open={opened}
+                    open={isOpen}
                     onClose={closeModal}
                     TransitionComponent={Transition}
                 >
@@ -103,7 +120,7 @@ class AddModal extends Component {
                             onClick={() => {
                                 closeModal();
                                 addRecipe();
-                      }}>
+                            }}>
                             <SaveIcon />
                         </Button>
                     </div>

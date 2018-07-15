@@ -5,11 +5,12 @@ import 'style/main.scss';
 import RecipeList from 'core/RecipeList';
 import AddModal from 'core/AddModal';
 
- class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      edit: false,
     };
   }
 
@@ -19,12 +20,19 @@ import AddModal from 'core/AddModal';
     });
   }
 
+  openModal = () => {
+    this.setState({
+      open: true,
+      edit: true,
+    });
+  }
+
   render() {
-    const { open } = this.state;
+    const { open, edit } = this.state;
     return (
       <div className="main_container">
-        <RecipeList />
-        <AddModal isOpen={open} closeModal={this.closeModal} />
+        <RecipeList openModal={this.openModal} />
+        <AddModal isOpen={open} isEdit={edit} closeModal={this.closeModal} />
 
         <div className="addButton">
           <Button variant="fab" color="primary" aria-label="add" onClick={() => this.setState({ open: true })}>

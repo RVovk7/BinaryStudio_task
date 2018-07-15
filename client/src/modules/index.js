@@ -4,7 +4,9 @@ import {
   compose,
 } from 'redux';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import {
+  createLogger,
+} from 'redux-logger';
 import rootReducer from './add';
 
 const logger = createLogger();
@@ -14,7 +16,7 @@ const chatStore = createStore(
   rootReducer,
   compose(
     middleware,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    window.navigator.userAgent.includes('Chrome') ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : compose,
   ),
 );
 
