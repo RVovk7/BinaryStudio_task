@@ -25,6 +25,7 @@ class AddModal extends Component {
         isEdit: PropTypes.bool.isRequired,
         closeModal: PropTypes.func.isRequired,
         postRecipe: PropTypes.func.isRequired,
+        editData: PropTypes.instanceOf(Object).isRequired,
     };
 
     constructor(props) {
@@ -45,31 +46,34 @@ class AddModal extends Component {
     }
 
     addRecipe = () => {
-        const { state: { recipeName, recipeDetail }, props: { postRecipe } } = this;
+        const { state: { recipeName, recipeDetail, isEdit }, props: { postRecipe, editData } } = this;
         if (!isEdit) {
             const data = {
                 time: Date.now(),
+                dateModify: Date.now(),
                 recipeName,
                 recipeDetail,
             };
             postRecipe(data);
-            this.setState({
-                recipeName: '',
-                recipeDetail: '',
-            });
         }
         if (isEdit) {
             const data = {
-                time: Date.now(),
+                time: editData.data.time,
+                dateModify: Date.now(),
                 recipeName,
                 recipeDetail,
             };
-            //  must recive 'time' from component Recipe and send to server
+            postRecipe(data);
         }
+        this.setState({
+            recipeName: '',
+            recipeDetail: '',
+        });
     }
 
     render() {
-        const { addRecipe, props: { closeModal }, state: { recipeName, recipeDetail, isOpen } } = this;
+        const { addRecipe, props: { closeModal, editData }, state: { recipeName, recipeDetail, isOpen } } = this;
+        console.log(editData);
         return (
             <div>
                 <Dialog
@@ -90,9 +94,6 @@ class AddModal extends Component {
                     </AppBar>
                     <form onSubmit={e => e.preventDefault()} className="addForm">
                         <DialogContent>
-                            {/*  <DialogContentText>
-                                Enter
-                            </DialogContentText> */}
                             <TextField
                                 label="recipe name"
                                 placeholder="Please enter recipe name"
@@ -130,9 +131,13 @@ class AddModal extends Component {
         );
     }
 }
-
+const mapStateToProps = (state = []) => {
+    return {
+        editData: state.editRecipe,
+    };
+};
 const mapDispatchToProps = dispatch => ({
     postRecipe: data => dispatch(actions.postRecipe(data)),
 });
 
-export default connect(null, mapDispatchToProps)(AddModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddModal);

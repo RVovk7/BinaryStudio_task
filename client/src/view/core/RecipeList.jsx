@@ -7,7 +7,9 @@ import Recipe from 'components/Recipe';
 class RecipeList extends Component {
     static propTypes = {
         getRecipe: PropTypes.func.isRequired,
+        deleteRecipe: PropTypes.func.isRequired,
         openModal: PropTypes.func.isRequired,
+        fromRecipeToModal: PropTypes.func.isRequired,
         Recipes: PropTypes.instanceOf(Object).isRequired,
     }
 
@@ -16,17 +18,19 @@ class RecipeList extends Component {
         getRecipe();
     }
 
-    componentWillReceiveProps() {
-        console.log('i recive props');
-    }
-
     render() {
-        const { Recipes, openModal } = this.props;
+        const { Recipes, openModal, fromRecipeToModal, deleteRecipe } = this.props;
         if (!Recipes.loading) {
             console.log('Recipes.data', Recipes.data);
             return (
                 <div className="recipeList">
-                    {Recipes.data.map(e => <Recipe key={e.time} rList={e} openModal={openModal} />)}
+                    {Recipes.data.map(e => (
+                        <Recipe
+                            key={e.time}
+                            rList={e}
+                            openModal={openModal}
+                            fromRecipeToModal={fromRecipeToModal}
+                            deleteRecipe={deleteRecipe} />))}
                 </div>
             );
         }
@@ -44,6 +48,8 @@ const mapStateToProps = (state = []) => {
 };
 const mapDispatchToProps = dispatch => ({
     getRecipe: () => dispatch(actions.getRecipe()),
+    deleteRecipe: data => dispatch(actions.deleteRecipe(data)),
+    fromRecipeToModal: data => dispatch(actions.fromRecipeToModal(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);

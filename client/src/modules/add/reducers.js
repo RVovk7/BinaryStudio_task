@@ -41,8 +41,27 @@ const getRecipe = (state = initialState, action) => {
   }
 };
 
+const editRecipe = (state = initialState, action) => {
+  const {
+    data,
+    type,
+  } = action;
+  switch (type) {
+    case types.EDIT_RECIPE:
+      return {
+        ...state,
+        data,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
 export const rootReducer = combineReducers({
   getRecipe,
+  editRecipe,
 });
 
 export default rootReducer;

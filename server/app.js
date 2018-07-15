@@ -12,7 +12,7 @@ const app = express(),
 /////mongoose schema
 const recipeSchema = new mongoose.Schema({
   time: Number,
-  timeModify: Number,
+  dateModify: Number,
   recipeName: String,
   recipeDetail: String
 
@@ -40,34 +40,47 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
+
 app.post('/api/addRecipe', (req, res) => {
-  DB.create(req.body).then(()=>
+  DB.create(req.body).then(() =>
     recipeDB
     .then(data =>
-      data.map(e=> e.data[e.data.length-1])
+      data.map(e => e.data[e.data.length - 1])
     )
     .then(data => res.send(JSON.stringify(
       data,
     )))
     .catch(er => console.error(er))
   )
- 
 });
+
 app.get('/api/getRecipe', (req, res) => {
   recipeDB
     .then(data =>
-      data.map(e=> e.data[e.data.length-1])
+      data.map(e => e.data[e.data.length - 1])
     )
     .then(data => res.send(JSON.stringify(
       data,
     )))
     .catch(er => console.error(er))
-
-
-
 });
 
-
+app.post('/api/deleteRecipe', (req, res) => {
+  console.log(req.body);
+  DB.remove({
+      time: req.body.data
+    })
+    .then(() =>
+      recipeDB
+      .then(data =>
+        data.map(e => e.data[e.data.length - 1])
+      )
+      .then(data => res.send(JSON.stringify(
+        data,
+      )))
+      .catch(er => console.error(er))
+    )
+});
 //////////
 /////////
 server.listen(3000, () => {

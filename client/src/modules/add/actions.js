@@ -44,19 +44,45 @@ export function postRecipe(recipeData) {
 
 export function getRecipe() {
   return dispatch => {
-    dispatch(fetchBegin());
     return fetch('http://localhost:3000/api/getRecipe')
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
         dispatch(fetchSuccess(json));
-        return json;
       })
       .catch(error => dispatch(fetchError(error)));
   };
 }
 
+export function deleteRecipe(data) {
+  return dispatch => {
+    dispatch(fetchBegin());
+    return fetch('http://localhost:3000/api/deleteRecipe', {
+        method: 'POST',
+        body: JSON.stringify({
+          data,
+        }),
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+      })
+      .then(handleErrors)
+      .then(res => res.json())
+      .then(json => {
+        dispatch(fetchSuccess(json));
+      })
+      .catch(error => dispatch(fetchError(error)));
+  };
+}
+
+export const fromRecipeToModal = data => ({
+  type: types.EDIT_RECIPE,
+  data,
+});
+
 export default {
   postRecipe,
   getRecipe,
+  deleteRecipe,
+  fromRecipeToModal,
 };

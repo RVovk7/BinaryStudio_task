@@ -34,35 +34,27 @@ body {
   justify-content: space-around;
 }
 
+
 .main_container {
   display: flex;
   background: rgba(255, 255, 255, 0.9);
   color: #000000;
   margin-top: 50px;
-  @include sm {
-    width: 900px;
-  }
-  @include norm {
-    width: 900px;
-  }
 }
 
 .recipeList {
   display: flex;
-  @include sm {
-    width: 900px;
-    min-height: 1300px;
-  }
-  @include norm {
-    min-height: 750px;
-    width: 1000px;
-  }
+ flex-wrap: wrap;
 }
 
 .addButton {
   display: flex;
-  margin: 50px;
+  position: fixed;
+  bottom: 15px;
+  right: 10px;
   align-self: flex-end;
+  float: right;
+
 }
 .addForm{
   margin-top: 50px;
