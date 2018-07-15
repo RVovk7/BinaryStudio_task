@@ -1,6 +1,6 @@
 import {
   combineReducers,
-} from 'redux';
+} from '../../../../../../Library/Caches/typescript/2.9/node_modules/redux';
 import types from './types';
 
 const initialState = {

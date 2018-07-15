@@ -26,7 +26,7 @@ function handleErrors(response) {
 export function postRecipe(recipeData) {
   return dispatch => {
     dispatch(fetchBegin());
-    return fetch('http://localhost:3000/api/addRecipe', {
+    return fetch('http://172.20.10.2:3000/api/addRecipe', {
         method: 'POST',
         body: JSON.stringify(recipeData),
         headers: new Headers({
@@ -44,7 +44,7 @@ export function postRecipe(recipeData) {
 
 export function getRecipe() {
   return dispatch => {
-    return fetch('http://localhost:3000/api/getRecipe')
+    return fetch('http://172.20.10.2:3000/api/getRecipe')
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -57,7 +57,7 @@ export function getRecipe() {
 export function deleteRecipe(data) {
   return dispatch => {
     dispatch(fetchBegin());
-    return fetch('http://localhost:3000/api/deleteRecipe', {
+    return fetch('http://172.20.10.2:3000/api/deleteRecipe', {
         method: 'POST',
         body: JSON.stringify({
           data,

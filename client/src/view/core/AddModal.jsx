@@ -17,7 +17,7 @@ import Slide from '@material-ui/core/Slide';
 import SaveIcon from '@material-ui/icons/Save';
 // --------------material import----------------
 function Transition(props) {
-    return <Slide direction="left" {...props} />;
+    return <Slide direction="Up" {...props} />;
 }
 class AddModal extends Component {
     static propTypes = {

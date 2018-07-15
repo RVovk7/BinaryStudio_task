@@ -23,7 +23,7 @@ class RecipeList extends Component {
         if (!Recipes.loading) {
             console.log('Recipes.data', Recipes.data);
             return (
-                <div className="recipeList">
+                <div className="grid">
                     {Recipes.data.map(e => (
                         <Recipe
                             key={e.time}

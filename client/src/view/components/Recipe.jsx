@@ -22,7 +22,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
     card: {
-        maxWidth: 400,
         margin: 15,
     },
     media: {
@@ -88,7 +87,7 @@ class Recipe extends Component {
         const { props: { classes, rList }, state: { expanded }, editClick, deleteClick } = this;
         const dateCreate = new Date(rList.dateModify || rList.time).toLocaleString('en');
         return (
-            <div>
+            <div className="grid__item--md-span-4">
                 <Card className={classes.card}>
                     <CardHeader
                         avatar={
@@ -122,13 +121,13 @@ class Recipe extends Component {
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
                         <Tooltip title="Edit">
-                            <IconButton onClick={editClick} variant="fab" aria-label="Edit" className={classes.button}>
+                            <IconButton onClick={editClick} variant="fab" aria-label="Edit" className="buttonSize">
                                 <img src={IconEdit} alt="icon" />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Delete">
-                            <IconButton onClick={deleteClick} color="secondary" aria-label="Delete">
-                                <img style={{ width: '25px' }} src={IconDelete} alt="icon" />
+                            <IconButton onClick={deleteClick} color="secondary" aria-label="Delete" className="buttonSize">
+                                <img src={IconDelete} alt="icon" />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Viev All">

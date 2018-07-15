@@ -8,6 +8,7 @@ import 'style/main.scss';
 // styles
 import RecipeList from 'core/RecipeList';
 import AddModal from 'core/AddModal';
+import Header from 'components/Header';
 
 
 const styles = theme => ({
@@ -51,11 +52,12 @@ class App extends Component {
     const { open, edit } = this.state;
     return (
       <div>
+        <Header />
         <div className="main_container">
           <div className="recipe_container">
             <RecipeList openModal={this.openModal} />
             <div className="addButton">
-              <Button variant="fab" color="primary" aria-label="add" onClick={() => this.setState({ open: true, edit: false })}>
+              <Button className="buttonSizeAdd" variant="fab" color="primary" aria-label="add" onClick={() => this.setState({ open: true, edit: false })}>
                 <AddIcon />
               </Button>
             </div>

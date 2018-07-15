@@ -6,19 +6,57 @@
   box-sizing: border-box;
 }
 
-$screen-sm-min: 600px;
-$screen-norm-min: 900px;
-@mixin sm {
-  @media (min-width: #{$screen-sm-min}) {
+$breakpoints: ( xs: 32rem, sm: 48rem, md: 72rem, lg: 96rem, );
+@mixin break($size) {
+  @media (min-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+@mixin break1() {
+  @media (min-width: 72rem) {
     @content;
   }
 }
 
-@mixin norm {
-  @media only screen and (min-width: #{$screen-norm-min}) {
-    @content;
+$items: 12;
+.grid {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 1rem;
+}
+
+@each $key,
+$value in $breakpoints {
+  @for $i from 1 through $items {
+    .grid__item--#{$key}-span-#{$i} {
+      flex: 0 0 100%;
+      .buttonSize {
+        width: 128px;
+        height: 128px;
+        img {
+          width: 64px;
+          height: 64px;
+        }
+      }
+    
+      @include break($key) {
+        flex: 0 0 #{$i / $items * 100%};
+       
+        .buttonSize {
+          width: 50px;
+          height: 50px;
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+       
+      }
+    }
   }
 }
+
+
 
 body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -34,32 +72,55 @@ body {
   justify-content: space-around;
 }
 
-
 .main_container {
   display: flex;
-  background: rgba(255, 255, 255, 0.9);
   color: #000000;
   margin-top: 50px;
 }
 
 .recipeList {
   display: flex;
- flex-wrap: wrap;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .addButton {
+  width:128px;
+  height: 128px;
+  @include break1(){
+    width: 96px;
+    height: 96px;
+  }
   display: flex;
   position: fixed;
   bottom: 15px;
-  right: 10px;
+  right: 20px;
   align-self: flex-end;
   float: right;
+  .buttonSizeAdd{
+    width:128px;
+    height: 128px;
+    @include break1(){
+      width: 96px;
+      height: 96px;
+    }
+  }
+}
+header {
+  background-color: #fff;
+  display: flex;
+  color: black;
+  height: 80px;
+  justify-content: space-around;
+  align-items: center;
 
 }
-.addForm{
+
+.addForm {
   margin-top: 50px;
 }
-.recipeList{
-  display:flex;
+
+.recipeList {
+  display: flex;
   padding: 15px;
 }
