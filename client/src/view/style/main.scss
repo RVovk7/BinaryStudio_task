@@ -5,6 +5,7 @@
 *:after {
   box-sizing: border-box;
 }
+
 body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   background: url(http://russenergo.ru/wp-content/uploads/2015/07/background-site1.jpg) no-repeat center center fixed;
@@ -15,19 +16,70 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  display: flex;
-  justify-content: space-around;
 }
 
-$breakpoints: (  sm: 48rem, md: 72rem );
+$breakpoints: ( xs: 32rem, sm: 48rem, md: 72rem, lg: 96rem, );
 @mixin break($size) {
   @media (min-width: map-get($breakpoints, $size)) {
     @content;
   }
 }
+
 @mixin break1() {
   @media (min-width: 72rem) {
     @content;
+  }
+}
+
+header {
+  background-color: #fff;
+  width: 100vw;
+  display: flex;
+  color: black;
+  height: 160px;
+  align-items: center;
+  .headText {
+    font-size: 2.1rem;
+    margin: 0 auto;
+  }
+  .backButton {
+    margin-left: 25px;
+    width: 96px;
+    height: 96px;
+    img {
+      width: 84px;
+      height: 84px;
+    }
+    @include break1() {
+      width: 72px;
+      height: 72px;
+      img {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  }
+  @include break1() {
+    height: 80px;
+  }
+}
+.buttonSizeV{
+  right: 20px;
+  width: 96px;
+  height: 96px;
+  margin: 20px;
+  img {
+    width: 84px;
+    height: 84px;
+  }
+  @include break1() {
+    width: 72px;
+    height: 72px;
+    right: 0px;
+    img {
+      width: 52px;
+      height: 52px;
+    }
   }
 }
 
@@ -52,10 +104,8 @@ $value in $breakpoints {
           height: 64px;
         }
       }
-    
       @include break($key) {
         flex: 0 0 #{$i / $items * 100%};
-       
         .buttonSize {
           width: 50px;
           height: 50px;
@@ -64,73 +114,83 @@ $value in $breakpoints {
             height: 25px;
           }
         }
-       
       }
     }
   }
 }
-#show{
+
+#show {
   width: 128px;
   height: 128px;
   img {
     width: 64px;
     height: 64px;
   }
-  @include break1(){
-     width: 50px;
-          height: 50px;
-          img {
-            width: 25px;
-            height: 25px;
-          }
-  }
-}
-.spinner{
- display: flex;
- width: 96rem;
- justify-content: space-around;
-
-  img{
-    width:512px;
-    height: 512px;
+  @include break1() {
+    width: 50px;
+    height: 50px;
+    img {
+      width: 25px;
+      height: 25px;
+    }
   }
 }
 
-p { 
-  font-size: 2.1rem!important;
-  @include break1(){
-    font-size: 1rem!important;
+.spinner {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  img {
+    width: 50vw;
+    height: 50vh;
+  }
+  .shead {
+    display: flex;
+    h1 {
+      justify-content: center;
+      margin: 0 auto;
+    }
   }
 }
 
+p {
+  font-size: 2.1rem !important;
+  @include break1() {
+    font-size: 1rem !important;
+  }
+}
 
 .main_container {
   display: flex;
   color: #000000;
-  margin-top: 50px;
+  justify-content: space-around;
 }
+
+.recipe_container {}
 
 .recipeList {
   display: flex;
   justify-content: space-between;
   padding: 15px;
   flex-wrap: wrap;
-
 }
-.recipeAvatar{
-  width:96px!important;
-  height: 96px!important;
-  background-color: red!important;
-  @include break1(){
-    width: 72px!important;
-    height: 72px!important;
+
+.recipeAvatar {
+  width: 96px !important;
+  height: 96px !important;
+  background-color: red !important;
+  @include break1() {
+    width: 72px !important;
+    height: 72px !important;
   }
 }
 
 .addButton {
-  width:128px;
+  width: 128px;
   height: 128px;
-  @include break1(){
+  @include break1() {
     width: 96px;
     height: 96px;
   }
@@ -140,26 +200,23 @@ p {
   right: 20px;
   align-self: flex-end;
   float: right;
-  .buttonSizeAdd{
-    width:128px;
+  .buttonSizeAdd {
+    width: 128px;
     height: 128px;
-    @include break1(){
+    span{
+      font-size: 96px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    @include break1() {
       width: 96px;
       height: 96px;
+     span{
+      font-size: 72px;
+     }
     }
   }
-}
-header {
-  background-color: #fff;
-  display: flex;
-  color: black;
-  height: 80px;
-  justify-content: space-around;
-  align-items: center;
-
 }
 
 .addForm {
   margin-top: 50px;
 }
-

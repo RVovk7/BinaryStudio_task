@@ -1,13 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import IconBack from 'svg/back.svg';
 
-export default class Header extends Component {
-    render() {
-        return (
-            <header>
-                <div className="headText">
-                    <h3>CookBook</h3>
-                </div>
-            </header>
-        );
-    }
+function Header({ view, getRecipe }) {
+    return (
+        <header>
+            {view && (
+            <IconButton className="backButton" color="inherit" onClick={getRecipe}>
+                <img src={IconBack} alt="icon" />
+            </IconButton>)
+            }
+            <div className="headText">
+                <h3>CookBook</h3>
+            </div>
+        </header>
+    );
 }
+
+Header.propTypes = {
+    view: PropTypes.bool.isRequired,
+    getRecipe: PropTypes.func.isRequired,
+};
+
+export default Header;

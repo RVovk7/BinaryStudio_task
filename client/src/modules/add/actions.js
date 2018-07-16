@@ -49,19 +49,41 @@ export function getRecipe() {
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
-          dispatch(fetchSuccess(json));
+        dispatch(fetchSuccess(json));
+      })
+      .catch(error => dispatch(fetchError(error)));
+  };
+}
+export function versionRecipe(data) {
+  return dispatch => {
+    dispatch(fetchBegin());
+    return fetch('http://172.20.10.2:3000/api/versionRecipe', {
+        method: 'POST',
+        body: JSON.stringify({
+          data,
+        }),
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+      })
+      .then(handleErrors)
+      .then(res => res.json())
+      .then(json => {
+        dispatch(fetchSuccess(json));
       })
       .catch(error => dispatch(fetchError(error)));
   };
 }
 
-export function deleteRecipe(data) {
+export function deleteRecipe(data, view, time) {
   return dispatch => {
     dispatch(fetchBegin());
     return fetch('http://172.20.10.2:3000/api/deleteRecipe', {
         method: 'POST',
         body: JSON.stringify({
           data,
+          view,
+          time,
         }),
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -85,5 +107,6 @@ export default {
   postRecipe,
   getRecipe,
   deleteRecipe,
+  versionRecipe,
   fromRecipeToModal,
 };

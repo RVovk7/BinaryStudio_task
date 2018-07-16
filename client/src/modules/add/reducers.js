@@ -7,6 +7,7 @@ const initialState = {
   data: [],
   loading: false,
   error: null,
+  view: false,
 };
 const getRecipe = (state = initialState, action) => {
   const {
@@ -25,7 +26,8 @@ const getRecipe = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data,
+        data: data.data,
+        view: data.view ? data.view : false,
       };
 
     case types.FETCH_ERROR:

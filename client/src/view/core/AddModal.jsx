@@ -84,7 +84,7 @@ class AddModal extends Component {
                 >
                     <AppBar>
                         <Toolbar>
-                            <IconButton color="inherit" onClick={closeModal} aria-label="Close">
+                            <IconButton style={{ width: '96px', height: '96px' }} color="inherit" onClick={closeModal} aria-label="Close">
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="title" color="inherit">

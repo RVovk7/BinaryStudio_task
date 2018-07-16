@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // styles
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import { withStyles } from '@material-ui/core/styles';
 import 'style/main.scss';
 // styles
 import RecipeList from 'core/RecipeList';
 import AddModal from 'core/AddModal';
-import Header from 'components/Header';
 
 
 const styles = theme => ({
@@ -48,19 +45,20 @@ class App extends Component {
     });
   }
 
+  openAdd = () => {
+    this.setState({
+      open: true,
+      edit: false,
+    });
+  }
+
   render() {
     const { open, edit } = this.state;
     return (
       <div>
-        <Header />
         <div className="main_container">
           <div className="recipe_container">
-            <RecipeList openModal={this.openModal} />
-            <div className="addButton">
-              <Button className="buttonSizeAdd" variant="fab" color="primary" aria-label="add" onClick={() => this.setState({ open: true, edit: false })}>
-                <AddIcon />
-              </Button>
-            </div>
+            <RecipeList openModal={this.openModal} openAdd={this.openAdd} />
           </div>
 
           <AddModal isOpen={open} isEdit={edit} closeModal={this.closeModal} />

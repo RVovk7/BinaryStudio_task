@@ -49,7 +49,9 @@ class Recipe extends Component {
         classes: PropTypes.instanceOf(Object).isRequired,
         openModal: PropTypes.func.isRequired,
         fromRecipeToModal: PropTypes.func.isRequired,
+        versionRecipe: PropTypes.func.isRequired,
         deleteRecipe: PropTypes.func.isRequired,
+        view: PropTypes.bool.isRequired,
     };
 
     constructor(props) {
@@ -71,8 +73,10 @@ class Recipe extends Component {
     };
 
     deleteClick = () => {
-        const { rList, deleteRecipe } = this.props;
-        deleteRecipe(rList.time);
+        const { rList, deleteRecipe, view } = this.props;
+        console.log(view);
+        if (!view) deleteRecipe(rList.time, view);
+        if (view) deleteRecipe(rList.dateModify, view, rList.time);
     }
 
     handleExpandClick = () => {
@@ -81,7 +85,7 @@ class Recipe extends Component {
 
 
     render() {
-        const { props: { classes, rList }, state: { expanded }, editClick, deleteClick } = this;
+        const { props: { classes, rList, versionRecipe, view }, state: { expanded }, editClick, deleteClick } = this;
         const dateCreate = new Date(rList.dateModify || rList.time).toLocaleString('en');
         return (
             <div className="grid__item--md-span-4">
@@ -96,12 +100,12 @@ class Recipe extends Component {
                             )
                         }
                         action={
-                            (
+                            (!view && (
                                 <Tooltip title="all recipe version">
-                                    <IconButton className="buttonSize">
+                                    <IconButton onClick={() => versionRecipe(rList.time)} className="buttonSizeV">
                                         <img src={IconMore} alt="icon" />
                                     </IconButton>
-                                </Tooltip>
+                                </Tooltip>)
                             )
                         }
                         title={<p> {rList.recipeName}</p>}
@@ -121,11 +125,12 @@ class Recipe extends Component {
                     </CardContent>
 
                     <CardActions className={classes.actions} disableActionSpacing>
-                        <Tooltip title="Edit">
-                            <IconButton onClick={editClick} variant="fab" aria-label="Edit" className="buttonSize">
-                                <img src={IconEdit} alt="icon" />
-                            </IconButton>
-                        </Tooltip>
+                        {!view && (
+                            <Tooltip title="Edit">
+                                <IconButton onClick={editClick} variant="fab" aria-label="Edit" className="buttonSize">
+                                    <img src={IconEdit} alt="icon" />
+                                </IconButton>
+                            </Tooltip>)}
                         <Tooltip title="Delete">
                             <IconButton onClick={deleteClick} color="secondary" aria-label="Delete" className="buttonSize">
                                 <img src={IconDelete} alt="icon" />

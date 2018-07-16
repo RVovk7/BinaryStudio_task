@@ -41,45 +41,81 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 
+app.get('/api/getRecipe', (req, res) => {
+  recipeDB
+    .then(data =>
+      data.map(e => e.data[e.data.length - 1])
+    )
+    .then(data => {
+      return data
+    })
+    .then(data => res.send(JSON.stringify({
+      data,
+    })))
+    .catch(er => console.error(er))
+});
+
 app.post('/api/addRecipe', (req, res) => {
   DB.create(req.body).then(() =>
     recipeDB
     .then(data =>
       data.map(e => e.data[e.data.length - 1])
     )
-    .then(data => res.send(JSON.stringify(
+    .then(data => res.send(JSON.stringify({
       data,
-    )))
+    })))
     .catch(er => console.error(er))
   )
 });
 
-app.get('/api/getRecipe', (req, res) => {
-  recipeDB
-    .then(data =>
-      data.map(e => e.data[e.data.length - 1])
-    )
-    .then(data => res.send(JSON.stringify(
+app.post('/api/versionRecipe', (req, res) => {
+
+  DB.find({
+      time: req.body.data
+    })
+    .then(data => res.send(JSON.stringify({
+      view: true,
       data,
-    )))
+    })))
     .catch(er => console.error(er))
 });
 
+
 app.post('/api/deleteRecipe', (req, res) => {
-  console.log(req.body);
-  DB.remove({
+
+  const remove = () => {
+    if (req.body.view) {
+      return DB.remove({
+        dateModify: req.body.data
+      })
+    }
+    return DB.remove({
       time: req.body.data
     })
-    .then(() =>
-      recipeDB
-      .then(data =>
-        data.map(e => e.data[e.data.length - 1])
-      )
-      .then(data => res.send(JSON.stringify(
+
+  }
+  remove()
+    .then(
+      () => {
+        if (!req.body.view) {
+          return (
+            recipeDB
+          )
+        }
+        return DB.find({
+          time: req.body.time
+        })
+      })
+    .then(data => {
+      if (!req.body.view) return data.map(e => e.data[e.data.length - 1])
+      return data
+    })
+    .then(data => res.send(JSON.stringify({
         data,
-      )))
-      .catch(er => console.error(er))
+        view: req.body.view,
+      }))
     )
+    .catch(er => console.error(er))
 });
 //////////
 /////////
