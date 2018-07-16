@@ -12,11 +12,10 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import red from '@material-ui/core/colors/red';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconEdit from 'svg/edit.svg';
 import IconDelete from 'svg/delete.svg';
+import IconMore from 'svg/more.svg';
+import IconArrow from 'svg/down-arrow.svg';
 import Tooltip from '@material-ui/core/Tooltip';
 // --------------material import----------------
 
@@ -41,9 +40,7 @@ const styles = theme => ({
     expandOpen: {
         transform: 'rotate(180deg)',
     },
-    avatar: {
-        backgroundColor: red[500],
-    },
+
 });
 
 class Recipe extends Component {
@@ -93,7 +90,7 @@ class Recipe extends Component {
                     <CardHeader
                         avatar={
                             (
-                                <Avatar aria-label="Recipe" className={classes.avatar}>
+                                <Avatar aria-label="Recipe" className="recipeAvatar">
                                     {rList.recipeName[0].toUpperCase()}
                                 </Avatar>
                             )
@@ -101,14 +98,14 @@ class Recipe extends Component {
                         action={
                             (
                                 <Tooltip title="all recipe version">
-                                    <IconButton>
-                                        <MoreVertIcon />
+                                    <IconButton className="buttonSize">
+                                        <img src={IconMore} alt="icon" />
                                     </IconButton>
                                 </Tooltip>
                             )
                         }
-                        title={rList.recipeName}
-                        subheader={dateCreate}
+                        title={<p> {rList.recipeName}</p>}
+                        subheader={<p> {dateCreate}</p>}
                     />
 
                     <CardMedia
@@ -137,6 +134,7 @@ class Recipe extends Component {
 
                         <Tooltip title="Viev All">
                             <IconButton
+                                id="show"
                                 className={classnames(classes.expand, {
                                     [classes.expandOpen]: expanded,
                                 })}
@@ -144,7 +142,7 @@ class Recipe extends Component {
                                 aria-expanded={expanded}
                                 aria-label="Show more"
                             >
-                                <ExpandMoreIcon />
+                                <img src={IconArrow} alt="icon" />
                             </IconButton>
                         </Tooltip>
                     </CardActions>

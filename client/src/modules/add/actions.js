@@ -44,11 +44,12 @@ export function postRecipe(recipeData) {
 
 export function getRecipe() {
   return dispatch => {
+    dispatch(fetchBegin());
     return fetch('http://172.20.10.2:3000/api/getRecipe')
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
-        dispatch(fetchSuccess(json));
+          dispatch(fetchSuccess(json));
       })
       .catch(error => dispatch(fetchError(error)));
   };

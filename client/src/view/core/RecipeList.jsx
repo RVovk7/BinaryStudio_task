@@ -3,6 +3,7 @@ import { actions } from 'modules/add';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Recipe from 'components/Recipe';
+import Spinner from 'svg/spinner.svg';
 
 class RecipeList extends Component {
     static propTypes = {
@@ -21,7 +22,6 @@ class RecipeList extends Component {
     render() {
         const { Recipes, openModal, fromRecipeToModal, deleteRecipe } = this.props;
         if (!Recipes.loading) {
-            console.log('Recipes.data', Recipes.data);
             return (
                 <div className="grid">
                     {Recipes.data.map(e => (
@@ -35,8 +35,8 @@ class RecipeList extends Component {
             );
         }
         return (
-            <div className="recipeList">
-                Loading...
+            <div className="spinner">
+                <img style={{ color: 'red' }} src={Spinner} alt="icon" />
             </div>
         );
     }
