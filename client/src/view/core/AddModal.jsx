@@ -17,7 +17,7 @@ import Slide from '@material-ui/core/Slide';
 import SaveIcon from '@material-ui/icons/Save';
 // --------------material import----------------
 function Transition(props) {
-    return <Slide direction="Up" {...props} />;
+    return <Slide direction="down" {...props} />;
 }
 class AddModal extends Component {
     static propTypes = {
@@ -115,6 +115,7 @@ class AddModal extends Component {
                     </form>
                     <div className="addButton">
                         <Button
+                            className="buttonSizeAdd"
                             variant="fab"
                             color="primary"
                             aria-label="add"

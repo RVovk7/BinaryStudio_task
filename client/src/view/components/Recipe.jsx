@@ -89,6 +89,7 @@ class Recipe extends Component {
         return (
             <div className="grid__item--md-span-4">
                 <Card className={classes.card}>
+
                     <CardHeader
                         avatar={
                             (
@@ -109,16 +110,19 @@ class Recipe extends Component {
                         title={rList.recipeName}
                         subheader={dateCreate}
                     />
+
                     <CardMedia
                         className={classes.media}
                         image="https://www.ihdimages.com/wp-content/uploadsktz/2014/11/delicious_food_wallpaper_free_desktop.jpg"
                         title={rList.recipeName}
                     />
+
                     <CardContent>
-                        <Typography component="p">
+                        <Typography component="p" className="recipeText">
                             {rList.recipeDetail.length < 100 ? rList.recipeDetail : `${rList.recipeDetail.slice(0, 100)}...`}
                         </Typography>
                     </CardContent>
+
                     <CardActions className={classes.actions} disableActionSpacing>
                         <Tooltip title="Edit">
                             <IconButton onClick={editClick} variant="fab" aria-label="Edit" className="buttonSize">
@@ -130,6 +134,7 @@ class Recipe extends Component {
                                 <img src={IconDelete} alt="icon" />
                             </IconButton>
                         </Tooltip>
+
                         <Tooltip title="Viev All">
                             <IconButton
                                 className={classnames(classes.expand, {
@@ -143,10 +148,11 @@ class Recipe extends Component {
                             </IconButton>
                         </Tooltip>
                     </CardActions>
+
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent>
-                            <Typography paragraph variant="body2">
-                                {`${rList.recipeDetail.slice(100)}...`}
+                            <Typography className="recipeText" paragraph variant="body2">
+                                {`${rList.recipeDetail.slice(100)}`}
                             </Typography>
                         </CardContent>
                     </Collapse>

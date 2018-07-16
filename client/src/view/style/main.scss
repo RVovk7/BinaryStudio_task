@@ -5,6 +5,19 @@
 *:after {
   box-sizing: border-box;
 }
+body {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  background: url(http://russenergo.ru/wp-content/uploads/2015/07/background-site1.jpg) no-repeat center center fixed;
+  padding: 0;
+  margin: 0;
+  color: white;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+}
 
 $breakpoints: ( xs: 32rem, sm: 48rem, md: 72rem, lg: 96rem, );
 @mixin break($size) {
@@ -30,6 +43,7 @@ $value in $breakpoints {
   @for $i from 1 through $items {
     .grid__item--#{$key}-span-#{$i} {
       flex: 0 0 100%;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       .buttonSize {
         width: 128px;
         height: 128px;
@@ -58,19 +72,7 @@ $value in $breakpoints {
 
 
 
-body {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  background: url(http://russenergo.ru/wp-content/uploads/2015/07/background-site1.jpg) no-repeat center center fixed;
-  padding: 0;
-  margin: 0;
-  color: white;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  display: flex;
-  justify-content: space-around;
-}
+
 
 .main_container {
   display: flex;
