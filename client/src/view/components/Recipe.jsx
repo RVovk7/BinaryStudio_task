@@ -25,7 +25,7 @@ const styles = theme => ({
     },
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '56.25%',
     },
     actions: {
         display: 'flex',
@@ -74,7 +74,6 @@ class Recipe extends Component {
 
     deleteClick = () => {
         const { rList, deleteRecipe, view } = this.props;
-        console.log(view);
         if (!view) deleteRecipe(rList.time, view);
         if (view) deleteRecipe(rList.dateModify, view, rList.time);
     }

@@ -2,7 +2,7 @@
   http = require('http'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser');
-mongoose.connect('mongodb://172.20.10.2:3001/recipeDB')
+mongoose.connect('mongodb://localhost:3001/recipeDB')
   .then(() => console.log('DB running on port 3001'))
   .catch((e) => {
     console.error(`DB fail: ${e}`)

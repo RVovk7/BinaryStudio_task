@@ -52,7 +52,6 @@ const webpackConfig = {
 			'core': path.resolve(__dirname, './src/view/core'),
 			'modules': path.resolve(__dirname, './src/modules'),
 			'style': path.resolve(__dirname, './src/view/style'),
-			'add': path.resolve(__dirname, './src/view/modules/add'),
 			'svg': path.resolve(__dirname, './src/assets/media/svg'),
 		},
 	},

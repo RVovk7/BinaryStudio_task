@@ -1,5 +1,6 @@
 import {
   createStore,
+  combineReducers,
   applyMiddleware,
   compose,
 } from 'redux';
@@ -7,7 +8,14 @@ import thunk from 'redux-thunk';
 import {
   createLogger,
 } from 'redux-logger';
-import rootReducer from './add';
+import fetchReducer from './fetch';
+import localReducer from './local';
+
+
+const rootReducer = combineReducers({
+  ...fetchReducer,
+  ...localReducer,
+});
 
 const logger = createLogger();
 const middleware = applyMiddleware(thunk, logger);

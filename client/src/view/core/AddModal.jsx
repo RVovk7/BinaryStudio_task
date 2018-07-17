@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line
-import { actions, addSelectors } from 'modules/add';
 import { connect } from 'react-redux';
+import { actionsFetch } from 'modules/fetch';
 // --------------material import----------------
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -73,7 +73,6 @@ class AddModal extends Component {
 
     render() {
         const { addRecipe, props: { closeModal, editData }, state: { recipeName, recipeDetail, isOpen } } = this;
-        console.log(editData);
         return (
             <div>
                 <Dialog
@@ -138,7 +137,7 @@ const mapStateToProps = (state = []) => {
     };
 };
 const mapDispatchToProps = dispatch => ({
-    postRecipe: data => dispatch(actions.postRecipe(data)),
+    postRecipe: data => dispatch(actionsFetch.postRecipe(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddModal);

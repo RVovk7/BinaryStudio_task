@@ -1,6 +1,3 @@
-import {
-  combineReducers,
-} from '../../../../../../Library/Caches/typescript/2.9/node_modules/redux';
 import types from './types';
 
 const initialState = {
@@ -10,6 +7,7 @@ const initialState = {
   view: false,
 };
 const getRecipe = (state = initialState, action) => {
+  console.log('im run');
   const {
     data,
   } = action;
@@ -43,27 +41,8 @@ const getRecipe = (state = initialState, action) => {
   }
 };
 
-const editRecipe = (state = initialState, action) => {
-  const {
-    data,
-    type,
-  } = action;
-  switch (type) {
-    case types.EDIT_RECIPE:
-      return {
-        ...state,
-        data,
-      };
-    default:
-      return {
-        ...state,
-      };
-  }
+export const fetchReducer = {
+  getRecipe,
 };
 
-export const rootReducer = combineReducers({
-  getRecipe,
-  editRecipe,
-});
-
-export default rootReducer;
+export default fetchReducer;

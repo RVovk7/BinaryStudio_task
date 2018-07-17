@@ -26,7 +26,7 @@ function handleErrors(response) {
 export function postRecipe(recipeData) {
   return dispatch => {
     dispatch(fetchBegin());
-    return fetch('http://172.20.10.2:3000/api/addRecipe', {
+    return fetch('http://localhost:3000/api/addRecipe', {
         method: 'POST',
         body: JSON.stringify(recipeData),
         headers: new Headers({
@@ -43,9 +43,10 @@ export function postRecipe(recipeData) {
 }
 
 export function getRecipe() {
+  console.log('IMPORTANT');
   return dispatch => {
     dispatch(fetchBegin());
-    return fetch('http://172.20.10.2:3000/api/getRecipe')
+    return fetch('http://localhost:3000/api/getRecipe')
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -57,7 +58,7 @@ export function getRecipe() {
 export function versionRecipe(data) {
   return dispatch => {
     dispatch(fetchBegin());
-    return fetch('http://172.20.10.2:3000/api/versionRecipe', {
+    return fetch('http://localhost:3000/api/versionRecipe', {
         method: 'POST',
         body: JSON.stringify({
           data,
@@ -78,7 +79,7 @@ export function versionRecipe(data) {
 export function deleteRecipe(data, view, time) {
   return dispatch => {
     dispatch(fetchBegin());
-    return fetch('http://172.20.10.2:3000/api/deleteRecipe', {
+    return fetch('http://localhost:3000/api/deleteRecipe', {
         method: 'POST',
         body: JSON.stringify({
           data,
@@ -98,15 +99,9 @@ export function deleteRecipe(data, view, time) {
   };
 }
 
-export const fromRecipeToModal = data => ({
-  type: types.EDIT_RECIPE,
-  data,
-});
-
 export default {
   postRecipe,
   getRecipe,
   deleteRecipe,
   versionRecipe,
-  fromRecipeToModal,
 };
