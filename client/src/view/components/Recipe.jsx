@@ -101,7 +101,7 @@ class Recipe extends Component {
                         action={
                             (!view && (
                                 <Tooltip title="all recipe version">
-                                    <IconButton onClick={() => versionRecipe(rList.time)} className="buttonSizeV">
+                                    <IconButton onClick={() => versionRecipe(rList.time)} className="buttonSizeVersion">
                                         <img src={IconMore} alt="icon" />
                                     </IconButton>
                                 </Tooltip>)

@@ -45,6 +45,12 @@ class RecipeList extends Component {
             return (
                 <Fragment>
                     <Header view={view} getRecipe={getRecipe} />
+                    {!Recipes.data.length && (
+                        <div style={{ justifyContent: 'center' }} className="spinner">
+                            <h1>No One Recipe</h1>
+                        </div>
+                    )
+                    }
                     <div className="grid">
                         {Recipes.data.map((e) => (
                             <Recipe

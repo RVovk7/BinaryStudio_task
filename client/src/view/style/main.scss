@@ -18,6 +18,7 @@ body {
   background-size: cover;
 }
 
+$cB: 128px; // circle button width and height
 $breakpoints: ( xs: 32rem, sm: 48rem, md: 72rem, lg: 96rem, );
 @mixin break($size) {
   @media (min-width: map-get($breakpoints, $size)) {
@@ -25,7 +26,7 @@ $breakpoints: ( xs: 32rem, sm: 48rem, md: 72rem, lg: 96rem, );
   }
 }
 
-@mixin break1() {
+@mixin lg() {
   @media (min-width: 72rem) {
     @content;
   }
@@ -37,12 +38,14 @@ header {
   display: flex;
   color: black;
   height: 160px;
-  align-items: center;
+  padding-bottom: 100px;
   .headText {
+    align-items: center;
     font-size: 2.1rem;
     margin: 0 auto;
   }
   .backButton {
+    margin-top: 10px;
     margin-left: 25px;
     width: 96px;
     height: 96px;
@@ -50,7 +53,7 @@ header {
       width: 84px;
       height: 84px;
     }
-    @include break1() {
+    @include lg() {
       width: 72px;
       height: 72px;
       img {
@@ -59,30 +62,56 @@ header {
       }
     }
   }
-  @include break1() {
+  @include lg() {
     height: 80px;
   }
 }
-.buttonSizeV{
-  right: 20px;
-  width: 96px;
-  height: 96px;
-  margin: 20px;
-  img {
-    width: 84px;
-    height: 84px;
-  }
-  @include break1() {
-    width: 72px;
-    height: 72px;
-    right: 0px;
-    img {
-      width: 52px;
-      height: 52px;
-    }
+
+p {
+  font-size: 2.1rem !important;
+  @include lg() {
+    font-size: 1rem !important;
   }
 }
 
+//// button +
+.addButton {
+  width: 196px;
+  height: 196px;
+  @include lg() {
+    width: 96px;
+    height: 96px;
+  }
+  display: flex;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  align-self: flex-end;
+  float: right;
+  .buttonSizeAdd {
+    width: 196px;
+    height: 196px;
+    span {
+      font-size: 96px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    img {
+      width: 48px;
+      height: 48px;
+      @include lg() {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    @include lg() {
+      width: 96px;
+      height: 96px;
+      span {
+        font-size: 72px;
+      }
+    }
+  }
+} // RecipeList grid
 $items: 12;
 .grid {
   display: flex;
@@ -97,8 +126,8 @@ $value in $breakpoints {
       flex: 0 0 100%;
       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       .buttonSize {
-        width: 128px;
-        height: 128px;
+        width: $cB;
+        height: $cB;
         img {
           width: 64px;
           height: 64px;
@@ -119,14 +148,34 @@ $value in $breakpoints {
   }
 }
 
+.buttonSizeVersion {
+  right: 20px;
+  width: 96px;
+  height: 96px;
+  margin: 20px;
+  img {
+    width: 84px;
+    height: 84px;
+  }
+  @include lg() {
+    width: 72px;
+    height: 72px;
+    right: 0px;
+    img {
+      width: 52px;
+      height: 52px;
+    }
+  }
+}
+
 #show {
-  width: 128px;
-  height: 128px;
+  width: $cB;
+  height: $cB;
   img {
     width: 64px;
     height: 64px;
   }
-  @include break1() {
+  @include lg() {
     width: 50px;
     height: 50px;
     img {
@@ -155,20 +204,11 @@ $value in $breakpoints {
   }
 }
 
-p {
-  font-size: 2.1rem !important;
-  @include break1() {
-    font-size: 1rem !important;
-  }
-}
-
 .main_container {
   display: flex;
   color: #000000;
   justify-content: space-around;
 }
-
-.recipe_container {}
 
 .recipeList {
   display: flex;
@@ -181,42 +221,76 @@ p {
   width: 96px !important;
   height: 96px !important;
   background-color: red !important;
-  @include break1() {
+  @include lg() {
     width: 72px !important;
     height: 72px !important;
   }
+} /// AddModal
+.modalBar {
+  p {
+    margin-top: 120px;
+    font-size: 3.4rem !important;
+    @include lg() {
+      margin-top: 40px;
+      font-size: 1.5rem !important;
+    }
+  }
+  .closeButton {
+    margin-top: 40px;
+    width: $cB;
+    height: $cB;
+    margin-right: 5vw;
+    img {
+      width: $cB;
+      height: $cB;
+    }
+    @include lg() {
+      width: 64px;
+      height: 64px;
+      margin-top: 10px;
+      img {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  }
 }
 
-.addButton {
-  width: 128px;
-  height: 128px;
-  @include break1() {
-    width: 96px;
-    height: 96px;
-  }
+.modalContent {
+  margin-top: 15vh;
   display: flex;
-  position: fixed;
-  bottom: 15px;
-  right: 20px;
-  align-self: flex-end;
-  float: right;
-  .buttonSizeAdd {
-    width: 128px;
-    height: 128px;
-    span{
-      font-size: 96px;
-      font-family: 'Courier New', Courier, monospace;
+  height: 25vh;
+  flex-direction: column;
+.modalInput{
+  margin: 5vh;
+  label{
+    font-size: 3rem;
+    margin-top: -70px;
+  }
+  textarea{
+    font-size: 1.5rem;
+    margin-top: -25px;
+  }
+  @include lg() {
+    label{
+      font-size: 1.5rem;
+      margin-top: -25px;
     }
-    @include break1() {
-      width: 96px;
-      height: 96px;
-     span{
-      font-size: 72px;
-     }
+    textarea{
+      font-size: 1rem;
+      margin-top: -15px;
     }
+  }
+
+}
+
+  @include lg() {
+    margin-top: 10vh;
   }
 }
 
-.addForm {
-  margin-top: 50px;
+.snackbarContent {
+  height: 10vh;
+  width: 30vw;
+  visibility: hidden;
 }

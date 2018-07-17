@@ -11,11 +11,26 @@ const app = express(),
   server = http.createServer(app);
 /////mongoose schema
 const recipeSchema = new mongoose.Schema({
-  time: Number,
-  dateModify: Number,
-  recipeName: String,
-  recipeDetail: String
-
+  time: {
+    type: Number,
+    required: true,
+    minlength: 3
+  },
+  dateModify:{
+    type: Number,
+    required: true,
+    minlength: 3
+  },
+  recipeName: {
+    type: String,
+    required: true,
+    minlength: 1
+  },
+  recipeDetail: {
+    type: String,
+    required: true,
+    minlength: 1
+  },
 });
 const DB = mongoose.model('recipeDB', recipeSchema);
 const recipeDB = DB.aggregate([{
