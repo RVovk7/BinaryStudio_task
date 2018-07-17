@@ -1,12 +1,12 @@
 {
-  "name": "chatv2",
+  "name": "cookbook",
   "version": "1.0.0",
-  "description": "chat with using react_redux_webSocket_nodeJS",
+  "description": "binari-studio",
   "main": "index.js",
   "author": "wolf",
   "license": "MIT",
   "scripts": {
-    "conf": "cd client && yarn && cd .. && cd server && yarn && cd .. ",
+    "conf": "yarn && cd client && yarn && cd .. && cd server && yarn && cd .. && yarn s ",
     "start:client": "cd client && yarn run start",
     "start:server": "cd server && nodemon app.js",
     "start:db": "cd server && mongod --dbpath data/db --port 3001",
