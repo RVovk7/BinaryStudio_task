@@ -6,6 +6,7 @@
   "author": "wolf",
   "license": "MIT",
   "scripts": {
+    "conf": "cd client && yarn && cd .. && cd server && yarn && cd .. ",
     "start:client": "cd client && yarn run start",
     "start:server": "cd server && nodemon app.js",
     "start:db": "cd server && mongod --dbpath data/db --port 3001",
