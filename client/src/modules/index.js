@@ -1,10 +1,10 @@
+import thunk from 'redux-thunk';
 import {
   createStore,
   combineReducers,
   applyMiddleware,
   compose,
 } from 'redux';
-import thunk from 'redux-thunk';
 import {
   createLogger,
 } from 'redux-logger';
@@ -13,8 +13,8 @@ import localReducer from './local';
 
 
 const rootReducer = combineReducers({
-  ...fetchReducer,
-  ...localReducer,
+  fetchReducer,
+  localReducer,
 });
 
 const logger = createLogger();

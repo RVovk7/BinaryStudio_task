@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionsFetch } from 'modules/fetch';
-import { actionsLocal } from 'modules/local';
+import { getRecipes, deleteRecipes, versionRecipes } from 'modules/fetch';
+import { fromRecipeToModals } from 'modules/local';
 import Recipe from 'components/Recipe';
 import Spinner from 'svg/spinner.svg';
 import Header from 'components/Header';
@@ -81,16 +81,15 @@ class RecipeList extends Component {
     }
 }
 const mapStateToProps = (state = []) => {
-    console.log(state);
     return {
-        Recipes: state.getRecipe,
+        Recipes: state.fetchReducer,
     };
 };
 const mapDispatchToProps = dispatch => ({
-    getRecipe: () => dispatch(actionsFetch.getRecipe()),
-    deleteRecipe: (data, view, time) => dispatch(actionsFetch.deleteRecipe(data, view, time)),
-    versionRecipe: data => dispatch(actionsFetch.versionRecipe(data)),
-    fromRecipeToModal: data => dispatch(actionsLocal.fromRecipeToModal(data)),
+    getRecipe: () => dispatch(getRecipes()),
+    deleteRecipe: (data, view, time) => dispatch(deleteRecipes(data, view, time)),
+    versionRecipe: data => dispatch(versionRecipes(data)),
+    fromRecipeToModal: data => dispatch(fromRecipeToModals(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);

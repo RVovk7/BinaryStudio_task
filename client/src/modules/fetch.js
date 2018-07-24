@@ -1,16 +1,60 @@
-import types from './types';
+const FETCH_BEGIN = 'FETCH_RECIPE_BEGIN';
+const FETCH_ERROR = 'FETCH_RECIPE_ERROR';
+const FETCH_SUCCESS = 'FETCH_RECIPE_SUCCESS';
 
+const initialState = {
+  data: [],
+  loading: false,
+  error: null,
+  view: false,
+};
+
+export default function fetchReducer(state = initialState, action) {
+  const {
+    data,
+  } = action;
+  switch (action.type) {
+    case FETCH_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        data: [],
+      };
+
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: data.data,
+        view: data.view ? data.view : false,
+      };
+
+    case FETCH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+        data: [],
+      };
+
+    default:
+      return state;
+  }
+}
+
+// used by all actions
 export const fetchBegin = () => ({
-  type: types.FETCH_BEGIN,
+  type: FETCH_BEGIN,
 });
 
 export const fetchSuccess = data => ({
-  type: types.FETCH_SUCCESS,
+  type: FETCH_SUCCESS,
   data,
 });
 
 export const fetchError = error => ({
-  type: types.FETCH_ERROR,
+  type: FETCH_ERROR,
   payload: {
     error,
   },
@@ -23,7 +67,8 @@ function handleErrors(response) {
   return response;
 }
 
-export function postRecipe(recipeData) {
+
+export function postRecipes(recipeData) {
   return dispatch => {
     dispatch(fetchBegin());
     return fetch('http://localhost:3000/api/addRecipe', {
@@ -42,8 +87,7 @@ export function postRecipe(recipeData) {
   };
 }
 
-export function getRecipe() {
-  console.log('IMPORTANT');
+export function getRecipes() {
   return dispatch => {
     dispatch(fetchBegin());
     return fetch('http://localhost:3000/api/getRecipe')
@@ -55,7 +99,7 @@ export function getRecipe() {
       .catch(error => dispatch(fetchError(error)));
   };
 }
-export function versionRecipe(data) {
+export function versionRecipes(data) {
   return dispatch => {
     dispatch(fetchBegin());
     return fetch('http://localhost:3000/api/versionRecipe', {
@@ -76,7 +120,7 @@ export function versionRecipe(data) {
   };
 }
 
-export function deleteRecipe(data, view, time) {
+export function deleteRecipes(data, view, time) {
   return dispatch => {
     dispatch(fetchBegin());
     return fetch('http://localhost:3000/api/deleteRecipe', {
@@ -98,10 +142,3 @@ export function deleteRecipe(data, view, time) {
       .catch(error => dispatch(fetchError(error)));
   };
 }
-
-export default {
-  postRecipe,
-  getRecipe,
-  deleteRecipe,
-  versionRecipe,
-};

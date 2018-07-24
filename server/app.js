@@ -2,13 +2,14 @@
   http = require('http'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser');
-mongoose.connect('mongodb://localhost:3001/recipeDB')
+  mongoose.connect('mongodb://admin:admin7@ds243041.mlab.com:43041/recipe')
   .then(() => console.log('DB running on port 3001'))
   .catch((e) => {
     console.error(`DB fail: ${e}`)
   });
 const app = express(),
   server = http.createServer(app);
+  const PORT = process.env.PORT || 3000
 /////mongoose schema
 const recipeSchema = new mongoose.Schema({
   time: {
@@ -57,6 +58,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.get('/api/getRecipe', (req, res) => {
+
   recipeDB
     .then(data =>
       data.map(e => e.data[e.data.length - 1])
@@ -134,6 +136,6 @@ app.post('/api/deleteRecipe', (req, res) => {
 });
 //////////
 /////////
-server.listen(3000, () => {
-  console.log("Express server listening on port " + 3000);
+server.listen(PORT, () => {
+  console.log("Express server listening on port " + PORT);
 });

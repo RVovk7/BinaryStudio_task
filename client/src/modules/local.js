@@ -1,16 +1,16 @@
-import types from './types';
+const EDIT_RECIPE = 'EDIT_RECIPE';
 
 const initialState = {
     data: [],
 };
 
-const editRecipe = (state = initialState, action) => {
+export default function localReducer(state = initialState, action) {
     const {
         data,
         type,
     } = action;
     switch (type) {
-        case types.EDIT_RECIPE:
+        case EDIT_RECIPE:
             return {
                 ...state,
                 data,
@@ -20,9 +20,9 @@ const editRecipe = (state = initialState, action) => {
                 ...state,
             };
     }
-};
+}
 
-export const localReducer = {
-    editRecipe,
-};
-export default localReducer;
+export const fromRecipeToModals = data => ({
+    type: EDIT_RECIPE,
+    data,
+});
