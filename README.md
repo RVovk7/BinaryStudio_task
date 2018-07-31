@@ -1,4 +1,4 @@
-## demo project on heroku && mLab hosted 
+## demo project on heroku & mLab hosted 
 
  yarn conf - to get all modules
  yarn s - start
