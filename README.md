@@ -1,5 +1,4 @@
 ## demo project on heroku && mLab hosted 
-## https://secret-savannah-15754.herokuapp.com
 
  yarn conf - to get all modules
  yarn s - start
