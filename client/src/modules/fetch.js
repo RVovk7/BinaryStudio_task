@@ -27,7 +27,7 @@ export default function fetchReducer(state = initialState, action) {
         ...state,
         loading: false,
         data: data.data,
-        view: data.view ? data.view : false,
+        view: data.view,
       };
 
     case FETCH_ERROR:
@@ -83,7 +83,7 @@ export function postRecipes(recipeData) {
       .then(json => {
         dispatch(fetchSuccess(json));
       })
-      .catch(error => dispatch(fetchFailure(error)));
+      .catch(error => dispatch(fetchError(error)));
   };
 }
 

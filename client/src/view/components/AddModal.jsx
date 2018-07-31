@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line
-import { connect } from 'react-redux';
-import { postRecipes } from 'modules/fetch';
 // --------------material import----------------
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -164,14 +161,4 @@ class AddModal extends Component {
         );
     }
 }
-const mapStateToProps = (state = []) => {
-    console.log(state);
-    return {
-        editData: state.localReducer.data,
-    };
-};
-const mapDispatchToProps = dispatch => ({
-    postRecipe: data => dispatch(postRecipes(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddModal);
+export default AddModal;

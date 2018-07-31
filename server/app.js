@@ -63,9 +63,6 @@ app.get('/api/getRecipe', (req, res) => {
     .then(data =>
       data.map(e => e.data[e.data.length - 1])
     )
-    .then(data => {
-      return data
-    })
     .then(data => res.send(JSON.stringify({
       data,
     })))
@@ -135,7 +132,7 @@ app.post('/api/deleteRecipe', (req, res) => {
     .catch(er => console.error(er))
 });
 //////////
-/////////
+
 server.listen(PORT, () => {
   console.log("Express server listening on port " + PORT);
 });
