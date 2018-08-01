@@ -68,7 +68,8 @@
        "no-mixed-operators":0,
        "react/jsx-closing-bracket-location":0,
        "no-return-assign":0,
-       "jsx-a11y/label-has-for":0
+       "jsx-a11y/label-has-for":0,
+       "import/no-extraneous-dependencies":0
     }
 }
 
