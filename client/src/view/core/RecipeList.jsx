@@ -60,7 +60,8 @@ class RecipeList extends Component {
                                 view={view}
                                 fromRecipeToModal={fromRecipeToModal}
                                 versionRecipe={versionRecipe}
-                                deleteRecipe={deleteRecipe} />))}
+                                deleteRecipe={deleteRecipe}
+                            />))}
                     </div>
                     <div className="addButton">
                         <Button className="buttonSizeAdd" variant="fab" color="primary" aria-label="add" onClick={openAdd}>

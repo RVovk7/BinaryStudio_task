@@ -61,7 +61,6 @@ const webpackConfig = {
 			filename: 'index.html',
 			path: outputPath,
 		}),
-		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 	],
 	devServer: {

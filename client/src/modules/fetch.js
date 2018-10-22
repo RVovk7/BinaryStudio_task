@@ -44,21 +44,9 @@ export default function fetchReducer(state = initialState, action) {
 }
 
 // used by all actions
-export const fetchBegin = () => ({
-  type: FETCH_BEGIN,
-});
-
-export const fetchSuccess = data => ({
-  type: FETCH_SUCCESS,
-  data,
-});
-
-export const fetchError = error => ({
-  type: FETCH_ERROR,
-  payload: {
-    error,
-  },
-});
+export const fetchBegin = () => ({ type: FETCH_BEGIN });
+export const fetchSuccess = data => ({ type: FETCH_SUCCESS, data });
+export const fetchError = error => ({ type: FETCH_ERROR, payload: { error } });
 
 function handleErrors(response) {
   if (!response.ok) {

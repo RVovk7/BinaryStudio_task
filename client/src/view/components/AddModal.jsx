@@ -151,7 +151,8 @@ class AddModal extends Component {
                             variant="fab"
                             color="primary"
                             aria-label="add"
-                            onClick={addRecipe}>
+                            onClick={addRecipe}
+                        >
                            <img src={IconSave} alt="icon" />
                         </Button>
                     </div>
